@@ -15,7 +15,7 @@ pub struct AppLogo {
 
 impl AppLogo {
     pub fn new() -> Self {
-        Self { size: px(16.) }
+        Self { size: px(18.) }
     }
 }
 

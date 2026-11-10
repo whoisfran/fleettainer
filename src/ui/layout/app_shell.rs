@@ -1,6 +1,6 @@
 use crate::ui::components::app_logo::AppLogo;
 use crate::ui::theme::AppColors;
-use gpui_kit::component::{TitleBar, h_flex, v_flex};
+use gpui_kit::component::{ActiveTheme, TitleBar, h_flex, v_flex};
 use gpui_kit::*;
 
 /// Layout principal: barra de título del kit (con pestañas) + contenido.
@@ -33,6 +33,7 @@ impl ParentElement for AppShell {
 impl RenderOnce for AppShell {
     fn render(self, _: &mut Window, cx: &mut App) -> impl IntoElement {
         let colors = AppColors::get(cx);
+        let mono = cx.theme().mono_font_family.clone();
 
         v_flex()
             .size_full()
@@ -45,19 +46,29 @@ impl RenderOnce for AppShell {
             ))
             // TitleBar del kit: controles de ventana nativos en macOS, propios en Linux/Windows.
             .child(
+                // Left: logo + name + section tabs. Right: app version.
                 TitleBar::new().child(
                     h_flex()
                         .w_full()
                         .pr_3()
-                        .justify_between()
-                        .children(self.tabs)
+                        .gap_3()
                         .child(
                             h_flex()
-                                .gap_2()
-                                .text_xs()
-                                .text_color(colors.muted)
+                                .gap(px(10.))
+                                .mr_2()
+                                .text_sm()
+                                .font_weight(FontWeight::SEMIBOLD)
                                 .child(AppLogo::new())
                                 .child("Fleettainer"),
+                        )
+                        .children(self.tabs)
+                        .child(div().flex_1())
+                        .child(
+                            div()
+                                .font_family(mono)
+                                .text_xs()
+                                .text_color(colors.faint)
+                                .child(format!("v{}", crate::VERSION)),
                         ),
                 ),
             )
