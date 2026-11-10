@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Fleettainer isotype "Pila F": three stacked containers forming an F.
+       The short one is green, like the app's "running" dot. -->
+  <rect x="8" y="10" width="48" height="13" rx="2.5" fill="#6ea8ff"/>
+  <rect x="8" y="26" width="34" height="13" rx="2.5" fill="#4a7fd6"/>
+  <rect x="8" y="42" width="16" height="13" rx="2.5" fill="#7fd48a"/>
+  <g stroke="#0c1424" stroke-opacity="0.45" stroke-width="2" stroke-linecap="round">
+    <path d="M17 14v5M26 14v5M35 14v5M44 14v5"/>
+    <path d="M17 30v5M26 30v5M33 30v5"/>
+  </g>
+</svg>

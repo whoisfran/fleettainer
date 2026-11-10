@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Fleettainer
+Comment=Manage Docker containers
+Exec=fleettainer
+Icon=fleettainer
+StartupWMClass=fleettainer
+Terminal=false
+Categories=Development;Utility;
+Keywords=docker;containers;compose;

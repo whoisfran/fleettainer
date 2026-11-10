@@ -1,0 +1,31 @@
+[package]
+name = "fleettainer"
+version = "0.1.0"
+edition = "2024"
+# gpui-kit 0.8 necesita Rust 1.93 o superior.
+rust-version = "1.93"
+description = "Desktop app to manage Docker containers"
+# TODO: pick the project's license (required to build the .rpm).
+license = "MIT"
+
+[dependencies]
+gpui-kit = "0.8"
+bollard = "0.21"
+tokio = { version = "1", features = ["rt-multi-thread", "sync"] }
+futures-util = "0.3"
+anyhow = "1"
+
+[profile.release]
+strip = true
+lto = "thin"
+
+# Packaging with `cargo generate-rpm` (see .github/workflows/rpm.yml).
+[package.metadata.generate-rpm]
+assets = [
+    { source = "target/release/fleettainer", dest = "/usr/bin/fleettainer", mode = "755" },
+    { source = "packaging/fleettainer.desktop", dest = "/usr/share/applications/fleettainer.desktop", mode = "644" },
+    { source = "assets/fleettainer.svg", dest = "/usr/share/icons/hicolor/scalable/apps/fleettainer.svg", mode = "644" },
+    { source = "assets/fleettainer-16.svg", dest = "/usr/share/icons/hicolor/16x16/apps/fleettainer.svg", mode = "644" },
+]
+# Detects the shared libraries the binary links to (glibc, fontconfig, xkbcommon…).
+auto-req = "auto"
